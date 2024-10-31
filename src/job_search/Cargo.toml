@@ -1,0 +1,14 @@
+use pyo3::prelude::*;
+
+#[pyfunction]
+fn search_jobs(keyword: &str, jobs: Vec<&str>) -> Vec<&str> {
+    jobs.into_iter()
+        .filter(|job| job.contains(keyword))
+        .collect()
+}
+
+#[pymodule]
+fn job_search(_py: Python, m: &PyModule) -> PyResult<()> {
+    m.add_function(wrap_pyfunction!(search_jobs, m)?)?;
+    Ok(())
+}
