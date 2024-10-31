@@ -118,6 +118,37 @@ fn main() {
 }
 ```
 
+### Running the Backend Server
+
+To run the backend server, follow these steps:
+
+1. Ensure that you have Rust and Cargo installed.
+2. Clone the repository and navigate to the project directory.
+3. Build the project using `cargo build`.
+4. Run the backend server using `cargo run`.
+
+The backend server will start and listen for incoming requests on `127.0.0.1:8080`.
+
+### API Endpoints
+
+The backend server provides the following API endpoints for job search and filtering:
+
+- **Search Jobs**: `POST /search_jobs/{keyword}`
+  - Request Body: JSON array of job titles (e.g., `["Software Engineer", "Data Scientist", "Backend Developer"]`)
+  - Response: JSON array of filtered job titles
+
+- **Filter Jobs by Salary Range**: `POST /filter_jobs_by_salary/{min_salary}/{max_salary}`
+  - Request Body: JSON array of job titles and salaries (e.g., `[["Software Engineer", 120000], ["Data Scientist", 130000], ["Backend Developer", 110000]]`)
+  - Response: JSON array of filtered job titles and salaries
+
+- **Filter Jobs by Job Type**: `POST /filter_jobs_by_job_type/{job_type}`
+  - Request Body: JSON array of job titles and job types (e.g., `[["Software Engineer", "Full-time"], ["Data Scientist", "Full-time"], ["Backend Developer", "Part-time"]]`)
+  - Response: JSON array of filtered job titles and job types
+
+- **Filter Jobs by Experience Level**: `POST /filter_jobs_by_experience/{experience_level}`
+  - Request Body: JSON array of job titles and experience levels (e.g., `[["Software Engineer", "Mid-level"], ["Data Scientist", "Senior"], ["Backend Developer", "Junior"]]`)
+  - Response: JSON array of filtered job titles and experience levels
+
 Contributing
 Contributions are welcome! Please submit a pull request or open an issue to get started.
 
