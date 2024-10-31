@@ -7,8 +7,32 @@ fn search_jobs(keyword: &str, jobs: Vec<&str>) -> Vec<&str> {
         .collect()
 }
 
+#[pyfunction]
+fn filter_jobs_by_salary_range(min_salary: u32, max_salary: u32, jobs: Vec<(&str, u32)>) -> Vec<(&str, u32)> {
+    jobs.into_iter()
+        .filter(|(_, salary)| *salary >= min_salary && *salary <= max_salary)
+        .collect()
+}
+
+#[pyfunction]
+fn filter_jobs_by_job_type(job_type: &str, jobs: Vec<(&str, &str)>) -> Vec<(&str, &str)> {
+    jobs.into_iter()
+        .filter(|(_, jt)| jt.contains(job_type))
+        .collect()
+}
+
+#[pyfunction]
+fn filter_jobs_by_experience_level(experience_level: &str, jobs: Vec<(&str, &str)>) -> Vec<(&str, &str)> {
+    jobs.into_iter()
+        .filter(|(_, exp)| exp.contains(experience_level))
+        .collect()
+}
+
 #[pymodule]
 fn job_search(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(search_jobs, m)?)?;
+    m.add_function(wrap_pyfunction!(filter_jobs_by_salary_range, m)?)?;
+    m.add_function(wrap_pyfunction!(filter_jobs_by_job_type, m)?)?;
+    m.add_function(wrap_pyfunction!(filter_jobs_by_experience_level, m)?)?;
     Ok(())
 }
